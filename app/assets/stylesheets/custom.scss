@@ -2,7 +2,7 @@
 @import "bootstrap";
 
 body {
-  padding-top: 350px;
+  padding-top: 200px;
   background-size: cover;
 
 }
@@ -56,4 +56,16 @@ p {
 }
 .navbar-fixed-bottom {
   background-color: #dcdcdc;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input {
+  height: auto !important;
 }
