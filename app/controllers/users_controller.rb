@@ -4,12 +4,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(user_params)
+    @user = User.find(params[:id])
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:success] = "登録されました"
+      redirect_to @user
 
     else
       render 'new'

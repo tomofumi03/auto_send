@@ -14,12 +14,13 @@
   </head>
 
   <body>
-    <div class="row">
-      <div class="col-xs-12">
     <%= render 'layouts/header' %>
-      <%= yield %>
-    <%= render 'layouts/footer' %>
+      <div class="container">
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+        <%= yield %>
       </div>
-    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>
