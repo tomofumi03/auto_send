@@ -1,0 +1,19 @@
+<% provide(:title, "Log in") %>
+<h1>ログイン</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+    <%= form_for(:session, url: login_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, placeholder: "メールアドレスを入力してください", class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, placeholder: "６文字以上", class: 'form-control' %>
+
+      <%= f.submit "ログイン", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>登録をしていない方はこちら <%= link_to "登録画面へ", signup_path %></p>
+  </div>
+</div>
