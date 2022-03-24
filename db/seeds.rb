@@ -1,7 +1,7 @@
-User.create!(name:  "tomo",
-             email: "tomo@tomo.com",
-             password:              "tomotomo",
-             password_confirmation: "tomotomo",
+User.create!(name:  "komu",
+             email: "komu@komu.com",
+             password:              "komukomu",
+             password_confirmation: "komukomu",
              admin: true)
 
 99.times do |n|
