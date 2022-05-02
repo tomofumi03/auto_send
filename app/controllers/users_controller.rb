@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    binding.pry
     if @user.save
       log_in @user
       flash[:success] = "登録されました"
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash[:success] = "消去しました"
     redirect_to users_url
   end
 
@@ -55,12 +56,7 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
 
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "ログインしてください"
-        redirect_to login_url
-      end
-    end
+
 
     def correct_user
       @user = User.find(params[:id])
