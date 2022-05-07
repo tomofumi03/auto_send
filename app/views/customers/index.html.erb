@@ -1,1 +1,8 @@
-<% provide(:title, '送信者一覧') %>
+<% provide(:title, '送信先一覧') %>
+<h1><%=  @user.name %>さんの送信先一覧</h1>
+
+<ul class="users">
+  <% @customers.each do |customer| %>
+    <%= render customer %>
+  <% end %>
+</ul>

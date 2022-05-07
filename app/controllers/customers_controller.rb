@@ -17,6 +17,8 @@ class CustomersController < ApplicationController
   end
 
   def index
+    @user = User.find(current_user.id)
+    @customers = Customer.where(user_id: @user.id)
   end
 
   private
