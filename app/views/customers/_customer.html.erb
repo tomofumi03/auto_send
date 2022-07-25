@@ -1,6 +1,8 @@
 <li>
   <%= link_to customer.name, "#" %>
 
-  | <%= link_to "delete", "#", method: :delete,
-                                  data: { confirm: "You sure?" } %>
+  | <%= link_to "削除", "#", method: :delete,
+                                  data: { confirm: "本当に削除しますか？" } %>
+  | <%= link_to "メールを送信する", customer, method: :patch,
+                                  data: { confirm: "メールを送信します" } %>
 </li>

@@ -16,9 +16,26 @@ class CustomersController < ApplicationController
     end
   end
 
+
+
   def index
+    #binding.pry
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
+
+  end
+
+  def update
+    customer = Customer.find(params[:id])
+    #customer.update(customer_params)
+    CustomerMailer.remind_mail(customer).deliver
+      if CustomerMailer.remind_mail(customer).deliver
+        flash[:success] = "メールを送信しました"
+        redirect_to customers_path
+      else
+        flash[:alert] = "もう一度やり直してください"
+        redirect_to customers_path
+      end
   end
 
   private
