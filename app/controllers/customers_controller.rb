@@ -24,27 +24,27 @@ class CustomersController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-    customers = Customer.where(user_id: @user.id)
-    @customers = customers.pluck(:email, :name)
-    @customers.each do |customer|
-      EveryoneMailer.remind_mail_to_everyone(customer).deliver
-      if EveryoneMailer.remind_mail_to_everyone(customer).deliver
+    @customers = Customer.where(user_id: @user.id)
+    customers = @customers.pluck(:email)
+      EveryoneMailer.remind_mail_to_everyone(customers).deliver
+      if EveryoneMailer.remind_mail_to_everyone(customers).deliver
+        flash[:success] = "メールを送信しました"
+        redirect_to customers_path
       else
         flash[:alert] = "もう一度やり直してください"
       end
-    end
 
 
 
-    customer = Customer.find(params[:id])
-    CustomerMailer.remind_mail(customer).deliver
-    if CustomerMailer.remind_mail(customer).deliver
-      flash[:success] = "メールを送信しました"
-      redirect_to customers_path
-    else
-      flash[:alert] = "もう一度やり直してください"
-      redirect_to customers_path
-    end
+    #customer = Customer.find(params[:id])
+    #CustomerMailer.remind_mail(customer).deliver
+    #if CustomerMailer.remind_mail(customer).deliver
+    #  flash[:success] = "メールを送信しました"
+    #  redirect_to customers_path
+    #else
+    #  flash[:alert] = "もう一度やり直してください"
+    #  redirect_to customers_path
+    #end
   end
 
   private
