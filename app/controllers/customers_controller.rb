@@ -26,7 +26,7 @@ class CustomersController < ApplicationController
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
     customers = @customers.pluck(:email)
-      EveryoneMailer.remind_mail_to_everyone(customers).deliver
+      #EveryoneMailer.remind_mail_to_everyone(customers).deliver
       if EveryoneMailer.remind_mail_to_everyone(customers).deliver
         flash[:success] = "メールを送信しました"
         redirect_to customers_path
