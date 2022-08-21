@@ -1,10 +1,8 @@
 <% provide(:title, '送信先一覧') %>
 <h1><%=  @user.name %>さんの送信先一覧</h1>
-<h2><%= link_to "全員にメールを送信する", @customers.first, method: :patch,
-                              data: { confirm: "メールを送信します"} %></h2>
+<h2><%= link_to "全員にメールを送信する",send_to_everyone_customers_path, method:  :post, data: { confirm: "メールを送信します"} %></h2>
 <ul class="users">
   <% @customers.each do |customer| %>
-
     <%= render customer %>
   <% end %>
 </ul>

@@ -7,5 +7,12 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   resources :users
-  resources :customers
+  resources :customers do
+    collection do
+      post 'send_to_everyone'
+    end
+    member do
+      post 'send_to_someone'
+    end
+  end
 end

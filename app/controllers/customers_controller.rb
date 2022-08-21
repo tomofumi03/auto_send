@@ -15,6 +15,29 @@ class CustomersController < ApplicationController
     end
   end
 
+  def send_to_everyone
+    @user = User.find(current_user.id)
+    @customers = Customer.where(user_id: @user.id)
+    customers = @customers.pluck(:email)
+
+      if EveryoneMailer.remind_mail_to_everyone(customers).deliver
+        flash[:success] = "メールを送信しました"
+        redirect_to customers_path
+      else
+        flash[:alert] = "もう一度やり直してください"
+      end
+  end
+
+  def send_to_someone
+    customer = Customer.find(params[:id])
+    if CustomerMailer.remind_mail(customer).deliver
+      flash[:success] = "メールを送信しました"
+      redirect_to customers_path
+    else
+      flash[:alert] = "もう一度やり直してください"
+      redirect_to customers_path
+    end
+  end
 
 
   def index
@@ -23,28 +46,11 @@ class CustomersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
-    @customers = Customer.where(user_id: @user.id)
-    customers = @customers.pluck(:email)
-      #EveryoneMailer.remind_mail_to_everyone(customers).deliver
-      if EveryoneMailer.remind_mail_to_everyone(customers).deliver
-        flash[:success] = "メールを送信しました"
-        redirect_to customers_path
-      else
-        flash[:alert] = "もう一度やり直してください"
-      end
 
 
 
-    #customer = Customer.find(params[:id])
-    #CustomerMailer.remind_mail(customer).deliver
-    #if CustomerMailer.remind_mail(customer).deliver
-    #  flash[:success] = "メールを送信しました"
-    #  redirect_to customers_path
-    #else
-    #  flash[:alert] = "もう一度やり直してください"
-    #  redirect_to customers_path
-    #end
+
+
   end
 
   private
