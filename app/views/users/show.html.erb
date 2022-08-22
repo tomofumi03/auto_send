@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
     <h2>ようこそ<%= @user.name %>さん!</h2>
-    <p><%= link_to "メールの送信先を作成", new_customer_path %></p>
-    <p><%= link_to "送信先一覧", customers_path %></p>
+    <p><%= link_to "メールの送信先を作成", new_user_customer_path(@user) %></p>
+    <p><%= link_to "送信先一覧", user_customers_path(@user) %></p>
   </div>
 </div>

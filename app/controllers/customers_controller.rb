@@ -2,6 +2,7 @@ class CustomersController < ApplicationController
   before_action :logged_in_user
   def new
     @customer = Customer.new
+    @user = current_user
   end
 
   def create
@@ -22,9 +23,10 @@ class CustomersController < ApplicationController
 
       if EveryoneMailer.remind_mail_to_everyone(customers).deliver
         flash[:success] = "メールを送信しました"
-        redirect_to customers_path
+        redirect_to user_customers_path(@customers)
       else
         flash[:alert] = "もう一度やり直してください"
+        redirect_to user_customers_path(@customers)
       end
   end
 
@@ -32,17 +34,18 @@ class CustomersController < ApplicationController
     customer = Customer.find(params[:id])
     if CustomerMailer.remind_mail(customer).deliver
       flash[:success] = "メールを送信しました"
-      redirect_to customers_path
+      redirect_to user_customers_path(customer)
     else
       flash[:alert] = "もう一度やり直してください"
-      redirect_to customers_path
+      redirect_to user_customers_path(customer)
     end
   end
 
 
   def index
     @user = User.find(current_user.id)
-    @customers = Customer.where(user_id: @user.id)#.pluck(:user_id)
+    @customers = Customer.where(user_id: @user.id)#.pluck(:name, :id)
+    #binding.pry
   end
 
   def update

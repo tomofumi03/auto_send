@@ -3,6 +3,6 @@
 
   | <%= link_to "削除", "#", method: :delete,
                                   data: { confirm: "本当に削除しますか？" } %>
-  | <%= link_to "メールを送信する", send_to_someone_customer_path(customer), method: :post,
+  | <%= link_to "メールを送信する", send_to_someone_user_customer_path(id: customer.id), method: :post,
                                   data: { confirm: "メールを送信します" } %>
 </li>
