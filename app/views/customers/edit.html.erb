@@ -1,0 +1,13 @@
+<% provide(:title, 'メール設定') %>
+<h1><%= @customer.name %>さんへのメールの設定</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
+    <%= form_for @customer, url: {controller: 'customers', action: 'update' } do |f| %>
+
+      <%= f.label :メールタイトル %>
+      <%= f.text_field :subject, placeholder: "メールタイトルを入力してください", class: 'form-control' %>
+      <%= f.submit "登録する", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

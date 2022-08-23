@@ -16,6 +16,20 @@ class CustomersController < ApplicationController
     end
   end
 
+  def edit
+    @customer = Customer.find(params[:id])
+  end
+
+  def update
+    @customer = Customer.find(params[:id])
+    if @customer.update_attributes(customer_params_subject)
+      flash[:success] = "登録されました"
+      redirect_to edit_user_customer_path(@customer)
+    else
+      render 'edit'
+    end
+  end
+
   def send_to_everyone
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
@@ -41,6 +55,10 @@ class CustomersController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
 
   def index
     @user = User.find(current_user.id)
@@ -48,16 +66,12 @@ class CustomersController < ApplicationController
     #binding.pry
   end
 
-  def update
-
-
-
-
-
-  end
 
   private
     def customer_params
       params.require(:customer).permit(:name, :email)
+    end
+    def customer_params_subject
+      params.require(:customer).permit(:subject)
     end
 end
