@@ -2,7 +2,7 @@ class EveryoneMailer < ApplicationMailer
 
 
   def remind_mail_to_everyone(customers)
-      mail bcc: customers, subject: '[自動送信]支払い期限が迫っています'
+      mail bcc: customers[0], subject: [1]
   end
 
 end
