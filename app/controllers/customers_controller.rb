@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
     customers = @customers.pluck(:email, :subject, :content)
-
+    binding.pry
       if EveryoneMailer.remind_mail_to_everyone(customers).deliver
         flash[:success] = "メールを送信しました"
         redirect_to user_customers_path(@customers)
