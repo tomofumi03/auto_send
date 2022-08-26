@@ -10,5 +10,4 @@ class EveryoneMailer < ApplicationMailer
       end
     end
   end
-
 end

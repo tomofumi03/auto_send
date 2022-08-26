@@ -33,7 +33,7 @@ class CustomersController < ApplicationController
   def send_to_everyone
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
-    customers = @customers.pluck(:email, :subject)
+    customers = @customers.pluck(:email, :subject, :content)
 
       if EveryoneMailer.remind_mail_to_everyone(customers).deliver
         flash[:success] = "メールを送信しました"
@@ -72,6 +72,6 @@ class CustomersController < ApplicationController
       params.require(:customer).permit(:name, :email)
     end
     def customer_params_subject
-      params.require(:customer).permit(:subject)
+      params.require(:customer).permit(:subject, :content)
     end
 end
