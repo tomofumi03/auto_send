@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
     @customer = current_user.customers.build(customer_params)
     if @customer.save
       flash[:success] = "新しい送信者を登録しました"
-      redirect_to customers_path
+      redirect_to user_customers_path
     else
       flash[:alert] = "もう一度やり直してください"
       render 'new'
@@ -34,7 +34,7 @@ class CustomersController < ApplicationController
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
     customers = @customers.pluck(:email, :subject, :content)
-    
+
       if EveryoneMailer.remind_mail_to_everyone(customers).deliver
         flash[:success] = "メールを送信しました"
         redirect_to user_customers_path(@customers)
@@ -57,6 +57,12 @@ class CustomersController < ApplicationController
 
   def show
 
+  end
+
+  def destroy
+    Customer.find(params[:id]).destroy
+    flash[:success] = "消去しました"
+    redirect_to user_customers_path(params[:user_id])
   end
 
 
