@@ -34,14 +34,11 @@ class CustomersController < ApplicationController
     @user = User.find(current_user.id)
     @customers = Customer.where(user_id: @user.id)
     customers = @customers.pluck(:email, :subject, :content)
-
-      if EveryoneMailer.remind_mail_to_everyone(customers).deliver
-        flash[:success] = "メールを送信しました"
-        redirect_to user_customers_path(@customers)
-      else
-        flash[:alert] = "もう一度やり直してください"
-        redirect_to user_customers_path(@customers)
+      customers.each do |customer|
+        EveryoneMailer.remind_mail_to_everyone(customer).deliver
       end
+    redirect_to user_customers_path(@customers)
+    flash[:success] = "全員にメールを送信しました"
   end
 
   def send_to_someone
