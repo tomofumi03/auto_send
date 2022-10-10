@@ -20,10 +20,9 @@ set :environment, :development
 #   runner "AnotherModel.prune_old_records"
 # end
 
-every 1.minutes do#, at: '6:00 pm' do
-
-# DailyMailerのdaily_notificationメソッド実行
+every 1.month, at: 'last of the month at 7:00 am' do
   runner "EveryoneMailer.remind_mail_to_everyone"
 end
+
 
 # Learn more: http://github.com/javan/whenever

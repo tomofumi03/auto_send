@@ -6,4 +6,5 @@
   | <%= link_to "メールを送信する", send_to_someone_user_customer_path(id: customer.id), method: :post,
                                   data: { confirm: "メールを送信します" } %>
   | <%= link_to "メール設定", edit_user_customer_path(id: customer.id), method: :get %>
+  | <%= link_to "メール内容を確認する", user_customer_path(id: customer.id), method: :get %>
 </li>

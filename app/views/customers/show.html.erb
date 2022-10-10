@@ -1,0 +1,16 @@
+<h1><%= "#{@customer.name}さんのメールの内容（タイトルと本文）" %></h1>
+<h2><%= "メールのタイトル" %></h2>
+<h3><% if @customer.subject == nil %>
+      <%= "お知らせ" %>
+    <% else %>
+      <%= @customer.subject %>
+    <% end %>
+</h3>
+<h2><%= "メールの本文" %></h2>
+<h3><% if @customer.content == nil %>
+      <%= "#{@customer.name}様。こんにちは。レッスン料の支払い期日が迫っていますので、支払いがまだの方はご準備をお願いいたします。" %>
+    <% else %>
+      <%= @customer.content %>
+    <% end %>
+</h3>
+<h2> <%= link_to "メールのタイトルと本文を訂正する", edit_user_customer_path(id: @customer.id), method: :get %></h2>

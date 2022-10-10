@@ -53,6 +53,7 @@ class CustomersController < ApplicationController
   end
 
   def show
+    @customer = Customer.find(params[:id])
 
   end
 
@@ -74,6 +75,7 @@ class CustomersController < ApplicationController
     def customer_params
       params.require(:customer).permit(:name, :email)
     end
+
     def customer_params_subject
       params.require(:customer).permit(:subject, :content)
     end
