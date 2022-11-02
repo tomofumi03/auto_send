@@ -1,6 +1,6 @@
 <% provide(:title, '送信先一覧') %>
 <h1><%=  @user.name %>さんの送信先一覧</h1>
-<h2>下の方々に毎月最終日の午前7時にメールを配信しています</h2>
+<h2>下の方々に毎月25日の午前7時にメールを配信しています</h2>
 <h2><%= link_to "今から全員にメールを送信する",send_to_everyone_user_customers_path, method:  :post, data: { confirm: "メールを送信します"} %></h2>
 
 <ul class = users>
